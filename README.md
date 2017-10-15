@@ -1,11 +1,11 @@
 # Historic Paintings API
 
-An api to that lists the worlds most historic paintings.
+An api that allows access to the worlds most historic paintings.
 
 ## Getting Started
 
 
-###Clone the Repo
+### Clone the Repo
 
 This section is intended for software developers.  If you have rights to the repo, simply clone the repo.  If you do not have rights to the repo, you may fork the repo and clone your fork.  
 
@@ -13,7 +13,7 @@ This section is intended for software developers.  If you have rights to the rep
 $ git clone <clone url>
 ```
 
-###Install Dependencies
+### Install Dependencies
 
 Install NPM dependencies using the following commands in your terminal:
 
