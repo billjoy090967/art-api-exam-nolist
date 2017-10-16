@@ -117,13 +117,7 @@ Sample Response:
 ```
 Sample Request Body JSON Data:
 
-{
-  "name": "The Persistence of Memory",
-  "movement": "surrealism",
-  "artist": "Salvador Dali",
-  "yearCreated": 1931,
-  "museum": {name: "Musuem of Modern Art", location: "New York"}
-}
+
 Sample Response:
 
 {
