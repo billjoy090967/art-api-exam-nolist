@@ -18,7 +18,11 @@ const {
   getPainting,
   updatePainting,
   addPainting,
-  deletePainting
+  deletePainting,
+  getArtist,
+  updateArtist,
+  addArtist,
+  deleteArtist
 } = require('./dal')
 const bodyParser = require('body-parser')
 const checkRequiredFields = require('./lib/check-required-fields')
@@ -115,6 +119,94 @@ app.put('/paintings/:id', (req, res, next) => {
 ///DELETE A PAINTING///
 app.delete('/paintings/:id', (req, res, next) =>
   deletePainting(path(['params', 'id'], req))
+    .then(deleteResponse => res.status(200).send(deleteResponse))
+    .catch(err => next(new nodeHTTPError(err.status, err.message)))
+)
+
+///POST ARTIST///
+app.post('/artists', (req, res, next) => {
+  if (isEmpty(prop('body', req))) {
+    return next(
+      new HTTPError(
+        400,
+        'Missing request body.  Content-Type header should be application/json.'
+      )
+    )
+  }
+
+  const body = compose(
+    omit(['_id', '_rev']),
+    merge(__, { type: 'artist' }),
+    prop('body')
+  )(req)
+
+  const missingFields = checkRequiredFields(
+    ['name', 'movement', 'painting', 'yearCreated', 'museum'],
+    prop('body', req)
+  )
+
+  if (not(isEmpty(missingFields))) {
+    return next(
+      new HTTPError(
+        400,
+        `Missing Required Fields: ${join(', ', missingFields)}`
+      )
+    )
+  }
+
+  addArtist(body)
+    .then(artist => res.status(201).send(artist))
+    .catch(err => next(new HTTPError(err.status, err.message)))
+})
+
+///GET ARTIST///
+app.get('/artists/:id', (req, res, next) => {
+  const artistID = path(['params', 'id'], req)
+  getArtist(ArtistID)
+    .then(artist => res.status(200).send(artist))
+    .catch(err =>
+      next(
+        new nodeHTTPError(err.status, err.message, {
+          description: 'This is not in the database'
+        })
+      )
+    )
+})
+
+///UPDATE AN ARTIST///
+app.put('/artists/:id', (req, res, next) => {
+  if (req.params.id === req.body._id) {
+    const checkResults = checkRequiredFields(
+      ['name', 'movement', 'painting', 'yearCreated', 'museum'],
+      prop('body', req)
+    )
+    if (isEmpty(checkResults)) {
+      updateArtist(prop('body', req))
+        .then(updatedArtistResult => res.status(200).send(updatedArtistResult))
+        .catch(err =>
+          next(
+            new nodeHTTPError(err.status, err.message, {
+              description: 'Didnt Update'
+            })
+          )
+        )
+    } else {
+      return next(
+        new nodeHTTPError(
+          400,
+          `Missing Required Fields in Request Body: ${join(', ', checkResults)}`
+        )
+      )
+    }
+  } else {
+    return next(
+      new nodeHTTPError(400, 'Artist id in path does not match_id in body.')
+    )
+  }
+})
+///DELETE AN ARTIST///
+app.delete('/artists/:id', (req, res, next) =>
+  deleteArtist(path(['params', 'id'], req))
     .then(deleteResponse => res.status(200).send(deleteResponse))
     .catch(err => next(new nodeHTTPError(err.status, err.message)))
 )
