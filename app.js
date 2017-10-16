@@ -141,7 +141,7 @@ app.post('/artists', (req, res, next) => {
   )(req)
 
   const missingFields = checkRequiredFields(
-    ['name', 'movement', 'painting', 'yearCreated', 'museum'],
+    ['name', 'movement', 'artist', 'yearCreated', 'museum'],
     prop('body', req)
   )
 
@@ -162,7 +162,7 @@ app.post('/artists', (req, res, next) => {
 ///GET ARTIST///
 app.get('/artists/:id', (req, res, next) => {
   const artistID = path(['params', 'id'], req)
-  getArtist(ArtistID)
+  getArtist(artistID)
     .then(artist => res.status(200).send(artist))
     .catch(err =>
       next(
@@ -177,7 +177,7 @@ app.get('/artists/:id', (req, res, next) => {
 app.put('/artists/:id', (req, res, next) => {
   if (req.params.id === req.body._id) {
     const checkResults = checkRequiredFields(
-      ['name', 'movement', 'painting', 'yearCreated', 'museum'],
+      ['name', 'movement', 'artist', 'yearCreated', 'museum'],
       prop('body', req)
     )
     if (isEmpty(checkResults)) {

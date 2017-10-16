@@ -15,8 +15,8 @@ const updatePainting = painting => db.put(painting)
 const deletePainting = id => db.get(id).then(painting => db.remove(painting))
 
 const addArtist = artist => {
-  artist._id = pkGen('artist', '_', artist.name)
-  return db.put(painting)
+  artist._id = pkGen('artist', '_', artist.artist)
+  return db.put(artist)
 }
 
 const getArtist = id => db.get(id)

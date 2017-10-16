@@ -2,47 +2,47 @@ require('dotenv').config()
 const PouchDB = require('pouchdb')
 const db = new PouchDB(process.env.COUCHDB_URL + process.env.COUCHDB_NAME)
 
-const paintings = [
+const artists = [
   {
-    _id: 'painting_starry_night',
+    _id: 'artist_vincent_van_gogh',
     name: 'The Starry Night',
-    type: 'painting',
+    type: 'author',
     movement: 'post-impressionism',
     artist: 'Vincent van Gogh',
     yearCreated: 1889,
     museum: { name: 'Museum of Modern Art', location: 'New York' }
   },
   {
-    _id: 'painting_water_lilies_nympheas',
+    _id: 'artist_claude_monet',
     name: 'Water Lilies Nympheas',
-    type: 'painting',
+    type: 'author',
     movement: 'impressionism',
     artist: 'Claude Monet',
     yearCreated: 1907,
     museum: { name: 'Art Gallery of Ontario', location: 'Toronto' }
   },
   {
-    _id: 'painting_last_supper',
+    _id: 'artist_leonardo_da_Vinci',
     name: 'The Last Supper',
-    type: 'painting',
+    type: 'author',
     movement: 'Renaissance',
     artist: 'Leonardo da Vinci',
     yearCreated: 1495,
     museum: { name: 'Santa Maria delle Grazie', location: 'Milan' }
   },
   {
-    _id: 'painting_sunday_afternoon_on_the_island_of_la_grande_jatte',
+    _id: 'artist_georges_seurat',
     name: 'A Sunday Afternoon on the Island of La Grande Jatte',
-    type: 'painting',
+    type: 'author',
     movement: 'impressionism',
     artist: 'Georges Seurat',
     yearCreated: 1884,
     museum: { name: 'Art Institute of Chicago', location: 'Chicago' }
   },
   {
-    _id: 'painting_guernica',
+    _id: 'artist_pablo_picasso',
     name: 'Guernica',
-    type: 'painting',
+    type: 'author',
     movement: 'surrealism',
     artist: 'Pablo Picasso',
     yearCreated: 1937,
@@ -52,9 +52,9 @@ const paintings = [
     }
   },
   {
-    _id: 'painting_bal_du_moulin_de_la_galette',
+    _id: 'artist_pierre_auguste_renoires',
     name: 'Bal du moulin de la Galette',
-    type: 'painting',
+    type: 'author',
     movement: 'impressionism',
     artist: 'Pierre-Auguste Renoires',
     yearCreated: 1876,
@@ -63,7 +63,7 @@ const paintings = [
 ]
 
 db
-  .bulkDocs(paintings)
+  .bulkDocs(artists)
   .then(function(result) {
     // handle possible successful future promised result
     console.log('SUCCESS!', result)

@@ -93,7 +93,7 @@ All endpoints within the paintings are located at the following base URL:
 
 **Response 200 - OK**
 
-***GET /paintings/{id}
+***GET /paintings/{id} or
 PUT /paintings/{id}***
 
 ```
@@ -158,7 +158,7 @@ Sample Response:
 
 **Response 409 - Conflict**
 
-***PUT / paintings***
+***PUT / artists***
 ```
 Sample Response:
 
