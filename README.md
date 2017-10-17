@@ -10,7 +10,7 @@ An api that allows access to the worlds most historic paintings.
 This section is intended for software developers.  If you have rights to the repo, simply clone the repo.  If you do not have rights to the repo, you may fork the repo and clone your fork.  
 
 ```
-$ git clone <clone url>
+$ git clone https://github.com/billjoy090967/art-api-exam-nolist.git
 ```
 
 ### Install Dependencies
@@ -18,7 +18,7 @@ $ git clone <clone url>
 Install NPM dependencies using the following commands in your terminal:
 
 ```
-$ cd libary-api
+$ cd art-api-exam-nolist
 $ npm install
 ```
 
@@ -26,12 +26,12 @@ $ npm install
 
 You'll need to create a local **.env** file to store your application's secret.  Follow these steps to generate and store the secrets.
 
-0. Create a `COUCH_URL` environment variable:  Using Cloudant for example or a local instance of CouchDB, create an API key for the database.  Store the key and password within your **.env** file.  Use the key and password to create an environment variable named `COUCH_URL` using this pattern `COUCH_URL=https://<key>:<password>@<your base url>/`.
+0. Create a `COUCHDB_URL` environment variable:  Using Cloudant for example or a local instance of CouchDB, create an API key for the database.  Store the key and password within your **.env** file.  Use the key and password to create an environment variable named `COUCHDB_URL` using this pattern `COUCHDB_URL=https://<key>:<password>@<your base url>/`.
 
   **Example**
 
   ```
-  COUCH_URL=https://sdfrtrerdfsxdnorth:187254aff7762f28afxu92d137c1899c14f7c999@jeffjohnson.cloudant.com/
+  COUCHDB_URL=https://sdfrtrerdfsxdnorth:187254aff7762f28afxu92d137c1899c14f7c999@jeffjohnson.cloudant.com/
   ```
 
 0.  Create a `PORT` environment variable used by the client application to connect and communicate with your api.
@@ -42,13 +42,22 @@ You'll need to create a local **.env** file to store your application's secret. 
   PORT=4000
   ```
 
-0. Create a `COUCH_DATABASE` environment variable.  The name of the database.
+0. Create a `COUCHDB_NAME` environment variable.  The name of the database.
 
   **Example**
 
   ```
-  COUCH_DATABASE=library
+  COUCHDB_NAME=billart
   ```
+
+### Load in Data
+
+Create an npm script named load that runs your load-data.js program.
+
+Test this program by running the following command from your terminal:
+
+``` npm run <script name>
+```
 
 
 ### Start the API
